@@ -12,7 +12,31 @@ library(lmtest)
 # dat <- dat %>% mutate(Sex=Sex-1)
 
 
-ZI_Power2 <- function(model,family,cov_interest,data,nsim,grid=seq(100,1000,100),cort=0){
+#' @title ZI_Power
+#' @description Performs power analysis using Zero-Inflated count GLM regression model.
+#' @param model PARAM_DESCRIPTION
+#' @param family PARAM_DESCRIPTION
+#' @param cov_interest PARAM_DESCRIPTION
+#' @param data PARAM_DESCRIPTION
+#' @param nsim PARAM_DESCRIPTION
+#' @param grid PARAM_DESCRIPTION, Default: seq(100, 1000, 100)
+#' @param cort PARAM_DESCRIPTION, Default: 0
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples 
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @seealso 
+#'  \code{\link[pscl]{zeroinfl}}
+#'  \code{\link[parameters]{p_value}}
+#' @rdname ZI_Power
+#' @export 
+#' @importFrom pscl zeroinfl
+#' @importFrom parameters p_value
+ZI_Power <- function(model,family,cov_interest,data,nsim,grid=seq(100,1000,100),cort=0){
   require(tidyverse)
   require(performance)
   
@@ -237,10 +261,10 @@ ZI_Power2 <- function(model,family,cov_interest,data,nsim,grid=seq(100,1000,100)
 ##  ZINB should give almost same results as ZIP since ZINB is reducing to ZIP
 
 # Original 
-
-o1 <- ZI_Power(model="Depression~Sex+EOD_total",cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),cort = 0)
-
-o2 <- ZI_Power2(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),cort = 0)
-
-o3 <- ZI_Power2(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "negbin",data = dat,nsim = 100,grid = seq(200,2500,500),cort = 0)
-
+# 
+# o1 <- ZI_Power(model="Depression~Sex+EOD_total",cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),cort = 0)
+# 
+# o2 <- ZI_Power2(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),cort = 0)
+# 
+# o3 <- ZI_Power2(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "negbin",data = dat,nsim = 100,grid = seq(200,2500,500),cort = 0)
+# 
