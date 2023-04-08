@@ -16,7 +16,7 @@
 #' \dontrun{
 #' if(interactive()){
 #'  #ZI_Power(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),cort = 0)
-#'  #ZI_Power(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),cort = "BY")
+#'  #'  #ZI_Power(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),cort = "BY")
 #'  }
 #' }
 #' @seealso 
@@ -28,11 +28,11 @@
 #' @importFrom pacman p_load
 #' @importFrom pscl zeroinfl
 #' @importFrom parameters p_value
-
-
 ZI_Power <- function(model,family,cov_interest,data,nsim,grid=seq(100,1000,100),alpha,padj=0){
   if (!require("pacman")) install.packages("pacman") 
   pacman::p_load(tidyverse,performance,pscl,stringr,stats,ggplot2)
+
+  
 
   ## Extract vector of covariate names
   cov <- attr(terms(formula(model)), which = "term.labels")
@@ -40,7 +40,7 @@ ZI_Power <- function(model,family,cov_interest,data,nsim,grid=seq(100,1000,100),
   ncov <- length(cov)
   ## Extract response variable name
   response <- as.character(attr(terms(formula(model)), which = "variables")[[2]])
-  
+
   ## Logic to determine correct index of coefficients 
   ##  in both components of mixture model for any number of covariates
   covi1 <- 2:(ncov+1)
@@ -97,7 +97,7 @@ ZI_Power <- function(model,family,cov_interest,data,nsim,grid=seq(100,1000,100),
     
   } 
   
-  
+
   ## Extract all coefficient names for mixture (ZI) GLM model
   cn <- names(coefs)
   cn <- str_split(cn,"_",simplify = T,n = 2)
@@ -175,7 +175,7 @@ ZI_Power <- function(model,family,cov_interest,data,nsim,grid=seq(100,1000,100),
     ##  All code is same except we simulated response with different distributions
     Sim <- function(ss){
       
-      
+
       COV <- Sim_Cov(ss,cov)
       COVc <- paste0("COV[,",1:ncov,"]",collapse = ",")
       
@@ -212,7 +212,7 @@ ZI_Power <- function(model,family,cov_interest,data,nsim,grid=seq(100,1000,100),
     sims <- replicate(nsim,expr = Sim(ss=ss),simplify = F)
     ## Combine all results into a matrix
     ps <- do.call(rbind,sims)
-    
+  
     ## Based on p-value adjustment/correction setting,
     ##  we take the proportion of times both unadjusted/adjusted p-value
     ##  for the coefficients in each model component are less than alpha
@@ -248,3 +248,10 @@ ZI_Power <- function(model,family,cov_interest,data,nsim,grid=seq(100,1000,100),
   
   
 }
+
+
+# o2 <- ZI_Power2(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),padj = 0)
+# 
+# o2 <- ZI_Power2(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 25,grid = seq(200,4000,500),padj = 0)
+# o2
+# o3 <- ZI_Power2(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "negbin",data = dat,nsim = 100,grid = seq(200,2500,500),padj = 0)
