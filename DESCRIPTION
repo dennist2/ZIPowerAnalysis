@@ -17,3 +17,7 @@ Imports:
     pscl,
     stats,
     stringr
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
