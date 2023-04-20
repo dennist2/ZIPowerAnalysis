@@ -229,8 +229,8 @@ ZI_Power <- function(model,family,cov_interest,data,nsim,grid=seq(100,1000,100),
   }
   
   
-  system.time(calcs <- lapply(X = grid,FUN = PowerAnalysis,nsim=nsim,cor=padj))
-  
+  system.time(calcs <- llply(as.list(grid),PowerAnalysis,nsim=nsim,cor=padj,.progress = "text"))
+    
   out <- data.frame(SampleSize=grid,Power=unlist(calcs))
   
   
