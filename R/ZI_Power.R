@@ -32,7 +32,7 @@
 
 ZI_Power <- function(model,family,cov_interest,data,nsim,grid=seq(100,1000,100),alpha,padj=0){
   if (!require("pacman")) install.packages("pacman") 
-  pacman::p_load(tidyverse,performance,pscl,stringr,stats,ggplot2)
+  pacman::p_load(tidyverse,performance,pscl,stringr,stats,ggplot2,plyr)
 
   ## Extract vector of covariate names
   cov <- attr(terms(formula(model)), which = "term.labels")

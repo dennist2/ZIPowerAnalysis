@@ -14,6 +14,7 @@ Imports:
     pacman,
     parameters,
     performance,
+    plyr,
     pscl,
     stats,
     stringr
