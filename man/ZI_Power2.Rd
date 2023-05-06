@@ -16,30 +16,30 @@ ZI_Power(
 )
 }
 \arguments{
-\item{model}{PARAM_DESCRIPTION}
+\item{model}{An R model formula specifying the regression relationship.}
 
-\item{family}{PARAM_DESCRIPTION}
+\item{family}{A string values of either “poisson” or “negbin”, which specify which family the count distribution in the zero-inflated GLM model should follow.}
 
-\item{cov_interest}{PARAM_DESCRIPTION}
+\item{cov_interest}{A string for the name of the predictor you are interested in calculating power for.}
 
-\item{data}{PARAM_DESCRIPTION}
+\item{data}{A data frame containing the data set to be used in fitting the initial model.}
 
-\item{nsim}{PARAM_DESCRIPTION}
+\item{nsim}{An integer value indicating the number of simulation interactions to perform for each different sample size value}
 
-\item{grid}{PARAM_DESCRIPTION, Default: seq(100, 1000, 100)}
+\item{grid}{A vector which specifies the sequence of sample size values to perform the calculation over, Default: seq(100, 1000, 100)}
 
-\item{alpha}{the specified significance level, Default: .05}
+\item{alpha}{The significance level you would like to be used when calculating the proportion of times p-values were less than a certain size, Default: .05}
 
-\item{padj}{specification for an option p-value adjustment using options in stats::p.adjust documentation. Value of 0 gives no correct and a string of any method in p.adjust() documentation can be used.  Default: 0}
+\item{padj}{Specification for a p-value adjustment using the options available for the stats::p.adjust function.  Default: 0}
 }
 \value{
-OUTPUT_DESCRIPTION
+A list object with two components: Results and Plot. Results is a data.frame object containing the sample size values used and the corresponding power calculation for each sample size. Plot contains a ggplot object which create a power curve showing the power as a function of sample size.
 }
 \description{
-FUNCTION_DESCRIPTION
+This function calculates power with Monte-Carlo simulation when using zero-inflated count GLM models.
 }
 \details{
-DETAILS
+For the padj argument, a value of 0 gives no correction and a string of any method in p.adjust() documentation will perform the corresponding adjustment in each power calculation.
 }
 \examples{
 \dontrun{
@@ -48,9 +48,6 @@ if(interactive()){
  #ZI_Power(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),cort = "BY")
  }
 }
-}
-\references{
-Benjamini, Y., and Yekutieli, D. (2001). The control of the false discovery rate in multiple testing under dependency. Annals of Statistics, 29, 1165–1188. doi:10.1214/aos/1013699998.
 }
 \seealso{
 \code{\link[pacman]{p_load}}

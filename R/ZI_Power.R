@@ -1,17 +1,16 @@
 #' @title ZI_Power
-#' @description FUNCTION_DESCRIPTION
-#' @param model PARAM_DESCRIPTION
-#' @param family PARAM_DESCRIPTION
-#' @param cov_interest PARAM_DESCRIPTION
-#' @param data PARAM_DESCRIPTION
-#' @param nsim PARAM_DESCRIPTION
-#' @param grid PARAM_DESCRIPTION, Default: seq(100, 1000, 100)
-#' @param alpha the specified significance level, Default: .05
-#' @param padj specification for an option p-value adjustment using options in stats::p.adjust documentation. Value of 0 gives no correct and a string of any method in p.adjust() documentation can be used.  Default: 0
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @references Benjamini, Y., and Yekutieli, D. (2001). The control of the false discovery rate in multiple testing under dependency. Annals of Statistics, 29, 1165–1188. doi:10.1214/aos/1013699998.
-#' @references 
+#' @description This function calculates power with Monte-Carlo simulation when using zero-inflated count GLM models.  
+#' @param model An R model formula specifying the regression relationship.
+#' @param family A string values of either “poisson” or “negbin”, which specify which family the count distribution in the zero-inflated GLM model should follow.
+#' @param cov_interest A string for the name of the predictor you are interested in calculating power for.
+#' @param data A data frame containing the data set to be used in fitting the initial model.
+#' @param nsim An integer value indicating the number of simulation interactions to perform for each different sample size value
+#' @param grid A vector which specifies the sequence of sample size values to perform the calculation over, Default: seq(100, 1000, 100)
+#' @param alpha The significance level you would like to be used when calculating the proportion of times p-values were less than a certain size, Default: .05
+#' @param padj Specification for a p-value adjustment using the options available for the stats::p.adjust function.  Default: 0
+#' @return A list object with two components: Results and Plot. Results is a data.frame object containing the sample size values used and the corresponding power calculation for each sample size. Plot contains a ggplot object which create a power curve showing the power as a function of sample size.
+#' @details For the padj argument, a value of 0 gives no correction and a string of any method in p.adjust() documentation will perform the corresponding adjustment in each power calculation.
+#' @references  
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
