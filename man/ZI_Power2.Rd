@@ -11,26 +11,26 @@ ZI_Power(
   data,
   nsim,
   grid = seq(100, 1000, 100),
-  alpha,
+  alpha = 0.05,
   padj = 0
 )
 }
 \arguments{
-\item{model}{An R model formula specifying the regression relationship.}
+\item{model}{An R model formula specifying the regression relationship to be used.}
 
-\item{family}{A string values of either “poisson” or “negbin”, which specify which family the count distribution in the zero-inflated GLM model should follow.}
+\item{family}{A character value of either “poisson” or “negbin”, which specifies the family that the count distribution in the zero-inflated GLM model should follow.}
 
-\item{cov_interest}{A string for the name of the predictor you are interested in calculating power for.}
+\item{cov_interest}{A character string for the name of the predictor you are interested in calculating power for.}
 
 \item{data}{A data frame containing the data set to be used in fitting the initial model.}
 
-\item{nsim}{An integer value indicating the number of simulation interactions to perform for each different sample size value}
+\item{nsim}{An integer value indicating the number of simulation iterations to perform for each different sample size value.}
 
 \item{grid}{A vector which specifies the sequence of sample size values to perform the calculation over, Default: seq(100, 1000, 100)}
 
-\item{alpha}{The significance level you would like to be used when calculating the proportion of times p-values were less than a certain size, Default: .05}
+\item{alpha}{The significance level you would like to use when calculating the proportion of times p-values were less than a certain size, Default: .05}
 
-\item{padj}{Specification for a p-value adjustment using the options available for the stats::p.adjust function.  Default: 0}
+\item{padj}{Character string specifying a p-value adjustment from the options available for the stats::p.adjust function.  Default: 0}
 }
 \value{
 A list object with two components: Results and Plot. Results is a data.frame object containing the sample size values used and the corresponding power calculation for each sample size. Plot contains a ggplot object which create a power curve showing the power as a function of sample size.
@@ -47,6 +47,8 @@ if(interactive()){
  #ZI_Power(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),cort = 0)
  #ZI_Power(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),cort = "BY")
  }
+ ZI_Power(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),cort = 0)
+ ZI_Power(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),cort = "BY")
 }
 }
 \seealso{

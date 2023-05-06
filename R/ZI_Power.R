@@ -1,13 +1,13 @@
 #' @title ZI_Power
 #' @description This function calculates power with Monte-Carlo simulation when using zero-inflated count GLM models.  
-#' @param model An R model formula specifying the regression relationship.
-#' @param family A string values of either “poisson” or “negbin”, which specify which family the count distribution in the zero-inflated GLM model should follow.
-#' @param cov_interest A string for the name of the predictor you are interested in calculating power for.
+#' @param model An R model formula specifying the regression relationship to be used.
+#' @param family A character value of either “poisson” or “negbin”, which specifies the family that the count distribution in the zero-inflated GLM model should follow.
+#' @param cov_interest A character string for the name of the predictor you are interested in calculating power for.
 #' @param data A data frame containing the data set to be used in fitting the initial model.
-#' @param nsim An integer value indicating the number of simulation interactions to perform for each different sample size value
+#' @param nsim An integer value indicating the number of simulation iterations to perform for each different sample size value.
 #' @param grid A vector which specifies the sequence of sample size values to perform the calculation over, Default: seq(100, 1000, 100)
-#' @param alpha The significance level you would like to be used when calculating the proportion of times p-values were less than a certain size, Default: .05
-#' @param padj Specification for a p-value adjustment using the options available for the stats::p.adjust function.  Default: 0
+#' @param alpha The significance level you would like to use when calculating the proportion of times p-values were less than a certain size, Default: .05
+#' @param padj Character string specifying a p-value adjustment from the options available for the stats::p.adjust function.  Default: 0
 #' @return A list object with two components: Results and Plot. Results is a data.frame object containing the sample size values used and the corresponding power calculation for each sample size. Plot contains a ggplot object which create a power curve showing the power as a function of sample size.
 #' @details For the padj argument, a value of 0 gives no correction and a string of any method in p.adjust() documentation will perform the corresponding adjustment in each power calculation.
 #' @references  
@@ -17,6 +17,8 @@
 #'  #ZI_Power(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),cort = 0)
 #'  #ZI_Power(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),cort = "BY")
 #'  }
+#'  ZI_Power(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),cort = 0)
+#'  ZI_Power(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),cort = "BY")
 #' }
 #' @seealso 
 #'  \code{\link[pacman]{p_load}}
@@ -29,7 +31,7 @@
 #' @importFrom parameters p_value
 
 
-ZI_Power <- function(model,family,cov_interest,data,nsim,grid=seq(100,1000,100),alpha,padj=0){
+ZI_Power <- function(model,family,cov_interest,data,nsim,grid=seq(100,1000,100),alpha=0.05,padj=0){
   if (!require("pacman")) install.packages("pacman") 
   pacman::p_load(tidyverse,performance,pscl,stringr,stats,ggplot2,plyr)
 
