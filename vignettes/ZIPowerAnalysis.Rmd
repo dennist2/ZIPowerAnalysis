@@ -14,12 +14,16 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+This is a basic example which shows the model used on the Depression data set in application portion of our paper
+
+```{r,include=FALSE}
+
+dat <- read.csv("~/Downloads/DataSubset_102922.csv")
+dat <- dplyr::mutate(dat,Sex=Sex-1)
+```
+
+
+```{r example}
 library(ZIPowerAnalysis)
+ZI_Power(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 100,grid = seq(250,4000,250),padj = 0)
 ```
-
-
-```{r}
-
-```
-

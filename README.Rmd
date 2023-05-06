@@ -31,7 +31,7 @@ devtools::install_github("dennist2/ZIPowerAnalysis")
 
 ## Example
 
-This is a basic example which shows the model used in the application portion of our paper
+This is a basic example which shows the model used on the Depression data set in application portion of our paper
 
 ```{r,include=FALSE}
 

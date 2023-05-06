@@ -10,6 +10,8 @@
 #' @param padj Character string specifying a p-value adjustment from the options available for the stats::p.adjust function.  Default: 0
 #' @return A list object with two components: Results and Plot. Results is a data.frame object containing the sample size values used and the corresponding power calculation for each sample size. Plot contains a ggplot object which create a power curve showing the power as a function of sample size.
 #' @details For the padj argument, a value of 0 gives no correction and a string of any method in p.adjust() documentation will perform the corresponding adjustment in each power calculation.
+#' 
+#' A progress bar was added to show completion percentage in real time. This can be useful since finer grids require high computation time and the progress bar can help estimate how long the calculations will take. 
 #' @references  
 #' @examples 
 #' \dontrun{
