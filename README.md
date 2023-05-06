@@ -20,36 +20,35 @@ devtools::install_github("dennist2/ZIPowerAnalysis")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows the model used in the application
+portion of our paper
 
 ``` r
 library(ZIPowerAnalysis)
-## basic example code
+ZI_Power(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 100,grid = seq(250,4000,250),padj = 0)
+#> Loading required package: pacman
+#>   |                                                                              |                                                                      |   0%  |                                                                              |====                                                                  |   6%  |                                                                              |=========                                                             |  12%  |                                                                              |=============                                                         |  19%  |                                                                              |==================                                                    |  25%  |                                                                              |======================                                                |  31%  |                                                                              |==========================                                            |  38%  |                                                                              |===============================                                       |  44%  |                                                                              |===================================                                   |  50%  |                                                                              |=======================================                               |  56%  |                                                                              |============================================                          |  62%  |                                                                              |================================================                      |  69%  |                                                                              |====================================================                  |  75%  |                                                                              |=========================================================             |  81%  |                                                                              |=============================================================         |  88%  |                                                                              |==================================================================    |  94%  |                                                                              |======================================================================| 100%
+#> $Results
+#>    SampleSize Power
+#> 1         250  0.12
+#> 2         500  0.33
+#> 3         750  0.41
+#> 4        1000  0.54
+#> 5        1250  0.53
+#> 6        1500  0.58
+#> 7        1750  0.64
+#> 8        2000  0.69
+#> 9        2250  0.75
+#> 10       2500  0.87
+#> 11       2750  0.89
+#> 12       3000  0.89
+#> 13       3250  0.90
+#> 14       3500  0.91
+#> 15       3750  0.92
+#> 16       4000  0.97
+#> 
+#> $Plot
+#> `geom_smooth()` using formula = 'y ~ x'
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/v1/examples>.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+<img src="man/figures/README-example-1.png" width="100%" />

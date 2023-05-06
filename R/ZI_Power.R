@@ -13,12 +13,9 @@
 #' @references  
 #' @examples 
 #' \dontrun{
-#' if(interactive()){
-#'  #ZI_Power(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),cort = 0)
-#'  #ZI_Power(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),cort = "BY")
-#'  }
-#'  ZI_Power(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),cort = 0)
-#'  ZI_Power(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),cort = "BY")
+#' Below code corresponds to usage based on the model outlined in our research paper:
+#'  ZI_Power(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),padj = 0)
+#'  ZI_Power(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 500,grid = seq(200,4000,100),padj = "BY")
 #' }
 #' @seealso 
 #'  \code{\link[pacman]{p_load}}

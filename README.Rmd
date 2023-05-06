@@ -31,25 +31,18 @@ devtools::install_github("dennist2/ZIPowerAnalysis")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows the model used in the application portion of our paper
+
+```{r,include=FALSE}
+
+dat <- read.csv("~/Downloads/DataSubset_102922.csv")
+dat <- dplyr::mutate(dat,Sex=Sex-1)
+```
+
 
 ```{r example}
 library(ZIPowerAnalysis)
-## basic example code
+ZI_Power(model=Depression~Sex+EOD_total,cov_interest = "EOD_total",family = "poisson",data = dat,nsim = 100,grid = seq(250,4000,250),padj = 0)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
 
-```{r cars}
-summary(cars)
-```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/v1/examples>.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
